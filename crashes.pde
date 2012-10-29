@@ -49,11 +49,12 @@ void setup() {
     size( sizeX, sizeY, JAVA2D );
     
   }
+  
   mapSize = new PVector( percentX(20), percentY(90));
   mapOffset = new PVector(percentX(70), percentY(0) );
   // Do not use smooth() on the wall with P2D (JAVA2D ok)
   noSmooth();
-  
+//  initializeStuff();
   touchList = new Hashtable();
   
   // Create a listener to get events
@@ -64,34 +65,20 @@ void setup() {
   
   // Sets applet to this sketch
   applet = this;
-
-  // create a new map, optionally specify a provider
   
-  // OpenStreetMap would be like this:
-  //map = new InteractiveMap(this, new OpenStreetMapProvider());
-  // but it's a free open source project, so don't bother their server too much
-  
-  // AOL/MapQuest provides open tiles too
-  // see http://developer.mapquest.com/web/products/open/map for terms
-  // and this is how to use them:
   String template = "http://{S}.mqcdn.com/tiles/1.0.0/osm/{Z}/{X}/{Y}.png";
   String[] subdomains = new String[] { "otile1", "otile2", "otile3", "otile4" }; // optional
   map = new InteractiveMap(this, new Microsoft.RoadProvider(), mapOffset.x, mapOffset.y, mapSize.x, mapSize.y );
   
   setMapProvider(0);
-  
+  map.setCenterZoom(locationChicago, 5);
   // others would be "new Microsoft.HybridProvider()" or "new Microsoft.AerialProvider()"
   // the Google ones get blocked after a few hundred tiles
   // the Yahoo ones look terrible because they're not 256px squares :)
 
-  // set the initial location and zoom level:
-  map.setCenterZoom(locationChicago, 5);  
   
   // zoom 0 is the whole world, 19 is street level
   // (try some out, or use getlatlon.com to search for more)
-
-  // set a default font for labels
-  font = createFont("Helvetica", 12);
 
   // enable the mouse wheel, for zooming
   addMouseWheelListener(new java.awt.event.MouseWheelListener() { 
@@ -104,20 +91,10 @@ void setup() {
 
 
 void draw() {
-  background(0);
+  background(#CCCCCC);
   
-  
-  // draw the map:
   map.draw();
-  // (that's it! really... everything else is interactions now)
-  
-  // Draw a rectangle showing the the resized and offset map
-  //noFill();
-  //stroke(10);
-  //strokeWeight(10);
-  //rect(mapOffset.x,mapOffset.y, mapSize.x,mapSize.y);
-  //strokeWeight(1);
-  
+    
   // Do not use smooth() on the wall with P2D (JAVA2D ok)
   noSmooth();
 
@@ -130,63 +107,46 @@ void draw() {
     }
   }
 
+// see if we're over any buttons, and respond accordingly:
+
   // if we're over a button, use the finger pointer
   // otherwise use the cross
-  // (I wish Java had the open/closed hand for "move" cursors)
   cursor(hand ? HAND : CROSS);
-
-  
-// see if the arrow keys or +/- keys are pressed:
-  // (also check space and z, to reset or round zoom levels)
-  if (keyPressed) {
-    if (key == CODED) {
-      if (keyCode == LEFT) {
-        map.tx += 5.0/map.sc;
-      }
-      else if (keyCode == RIGHT) {
-        map.tx -= 5.0/map.sc;
-      }
-      else if (keyCode == UP) {
-        map.ty += 5.0/map.sc;
-      }
-      else if (keyCode == DOWN) {
-        map.ty -= 5.0/map.sc;
-      }
-    }  
-    else if (key == '+' || key == '=') {
-      map.sc *= 1.05;
-    }
-    else if (key == '_' || key == '-' && map.sc > 2) {
-      map.sc *= 1.0/1.05;
-    }
-  }
-  
-  if (gui) {
+if (gui) {
     textFont(font, 12);
 
     // grab the lat/lon location under the mouse point:
     Location location = map.pointLocation(mouseX, mouseY);
 
-    // draw the mouse location, bottom left:
-    fill(0);
-    noStroke();
-    rect(5, height-5-g.textSize, textWidth("mouse: " + location), g.textSize+textDescent());
     fill(255,255,0);
     textAlign(LEFT, BOTTOM);
     //text("mouse: " + location, 5, height-5);
     text("Touches: " + touchList.size(), 5, height-5);
-    
+
     if(clicked)
     drawDetails();
-    drawMenu();
+    if(menuCounter <= 99 && menuCounter >= 65)
+    {
+      if(!menu)
+      {
+        while(menuCounter < 99)
+        {
+          menuCounter += 1;
+        }
+      }
+      else if (menu)
+      {
+        while(menuCounter > 65)
+        {
+           menuCounter -= 1;
+        }
+      }
+    }
+    
+    drawMenu(menuCounter);
     // grab the center
     //location = map.pointLocation(mapOffset.x + mapSize.x/2, mapOffset.y + mapSize.y/2);
 
-    // draw the center location, bottom right:
-    fill(0);
-    noStroke();
-    float rw = textWidth("map: " + location);
-    rect(width-5-rw, height-5-g.textSize, rw, g.textSize+textDescent());
     fill(255,255,0);
     //textAlign(RIGHT, BOTTOM);
     text("map: " + location, width-5, height-5);
@@ -200,10 +160,7 @@ void draw() {
     ellipse(p.x, p.y, 10, 10);
   }  
   
-  fill(16);
-  noStroke();
-  rect(0, height-16 * 2, 100, 16 * 2);
-  fill(255,255,0);
+  fill(0);
   //text("mouse: " + location, 5, height-5);
   
   // Center of the map
@@ -218,85 +175,4 @@ void draw() {
   
   omicronManager.process();
 }
-
-void keyReleased() {
-  if (key == 'g' || key == 'G') {
-    gui = !gui;
-  }
-  else if (key == 's' || key == 'S') {
-    save("modest-maps-app.png");
-  }
-  else if (key == 'z' || key == 'Z') {
-    map.sc = pow(2, map.getZoom());
-  }
-  else if (key == ' ') {
-    map.sc = 2.0;
-    map.tx = -128;
-    map.ty = -128; 
-  }
-  else if (key == 'm') {
-    currentProvider++;
-    
-    if( currentProvider > 2 )
-      currentProvider = 0;
-      
-    setMapProvider( currentProvider );
-  }
-}
-
-
-// see if we're over any buttons, otherwise tell the map to drag
-void mouseDragged() {
-  boolean hand = false;
-  if (gui) {
-    for (int i = 0; i < buttons.length; i++) {
-      hand = hand || buttons[i].mouseOver();
-      if (hand) break;
-    }
-  }
-  if (!hand) {
-    //map.mouseDragged(); 
-  }
-}
-
-// zoom in or out:
-void mouseWheel(int delta) {
-  float sc = 1.0;
-  if (delta < 0) {
-    sc = 1.05;
-  }
-  else if (delta > 0) {
-    sc = 1.0/1.05; 
-  }
-  float mx = (mouseX - mapOffset.x) - mapSize.x/2;
-  float my = (mouseY - mapOffset.y) - mapSize.y/2;
-  map.tx -= mx/map.sc;
-  map.ty -= my/map.sc;
-  map.sc *= sc;
-  map.tx += mx/map.sc;
-  map.ty += my/map.sc;
-}
-
-// see if we're over any buttons, and respond accordingly:
-void mouseClicked() {
-  if (in.mouseOver()) {
-    map.zoomIn();
-  }
-  else if (out.mouseOver()) {
-    map.zoomOut();
-  }
-  else if (up.mouseOver()) {
-    map.panUp();
-  }
-  else if (down.mouseOver()) {
-    map.panDown();
-  }
-  else if (left.mouseOver()) {
-    map.panLeft();
-  }
-  else if (right.mouseOver()) {
-    map.panRight();
-  }
-}
-
 
