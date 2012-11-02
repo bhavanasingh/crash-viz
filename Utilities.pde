@@ -5,6 +5,7 @@ import com.modestmaps.*;
 import com.modestmaps.core.*;
 import com.modestmaps.geo.*;
 import com.modestmaps.providers.*;
+import de.bezier.data.sql.*;
 
 OmicronAPI omicronManager;
 TouchListener touchListener;
@@ -12,16 +13,26 @@ PVector mapSize;
 PVector mapOffset;
 boolean onWall = false;
 boolean gui = true;
-PFont font = createFont("Helvetica", 12);
+PFont font = createFont("Helvetica", 30);
 // Link to this Processing applet - used for touchDown() callback example
 PApplet applet;
+DBHelper db = new DBHelper();//To work with database
 
 Hashtable touchList;
 int sizeX = ceil(8160/5);
 int sizeY = ceil(2304/5);
 int scaleFactor = 1; //5 for wall
+int scaleFactorY = 1; //5 for wall
 boolean clicked = false, menu = false;
 int menuCounter = 99;//when the menu is closed, position of the upper line is percentY(99)
+
+//Database stuff
+String mysqlUser = "root";
+String mysqlPwd = "bs140209";
+String mysqlServer = "";
+String mysqlDatabase = "FARS"; 
+
+ArrayList<Integer> dataPoint = new ArrayList<Integer>();
 
 
 float c_lat, c_lon;
@@ -39,16 +50,80 @@ PanButton right = new PanButton(22,41,14,14,RIGHT);
 // all the buttons in one place, for looping:
 Button[] buttons = { in, out, up, down, left, right };
 
+//Menu buttons
+easyButton b1  = new easyButton(percentX(1), percentY(37), percentX(2), percentX(2),"Male");
+easyButton b2  = new easyButton(percentX(1), percentY(45), percentX(2), percentX(2),"Female");
+
+easyButton b3  = new easyButton(percentX(1), percentY(58), percentX(2), percentX(2),"Young\nAdult");
+easyButton b4  = new easyButton(percentX(1), percentY(66), percentX(2), percentX(2),"Adult");
+easyButton b5  = new easyButton(percentX(1), percentY(74), percentX(2), percentX(2),"Old Adult");
+easyButton b6  = new easyButton(percentX(1), percentY(82), percentX(2), percentX(2),"Elderly");
+
+easyButton b7  = new easyButton(percentX(8), percentY(37), percentX(2), percentX(2),"Clear");
+easyButton b8  = new easyButton(percentX(8), percentY(45), percentX(2), percentX(2),"Rain");
+easyButton b9  = new easyButton(percentX(8), percentY(53), percentX(2), percentX(2),"Sleet");
+easyButton b10  = new easyButton(percentX(8), percentY(61), percentX(2), percentX(2),"Snow");
+easyButton b11  = new easyButton(percentX(8), percentY(69), percentX(2), percentX(2),"Fog");
+
+easyButton b12  = new easyButton(percentX(8), percentY(82), percentX(2), percentX(2),"Hit and\nRun");
+
+easyButton b13  = new easyButton(percentX(15), percentY(37), percentX(2), percentX(2),"Morning");
+easyButton b14  = new easyButton(percentX(15), percentY(45), percentX(2), percentX(2),"Afternoon");
+easyButton b15  = new easyButton(percentX(15), percentY(53), percentX(2), percentX(2),"Evening");
+easyButton b16  = new easyButton(percentX(15), percentY(61), percentX(2), percentX(2),"Night");
+
+easyButton b17  = new easyButton(percentX(15), percentY(74), percentX(2), percentX(2),"Winter");
+easyButton b18  = new easyButton(percentX(15), percentY(82), percentX(2), percentX(2),"Spring");
+easyButton b19  = new easyButton(percentX(15), percentY(90), percentX(2), percentX(2),"Summer");
+easyButton b20  = new easyButton(percentX(15), percentY(98), percentX(2), percentX(2),"Fall");
+
+easyButton b21  = new easyButton(percentX(22), percentY(37), percentX(2), percentX(2),"Sunday");
+easyButton b22  = new easyButton(percentX(22), percentY(45), percentX(2), percentX(2),"Monday");
+easyButton b23  = new easyButton(percentX(22), percentY(53), percentX(2), percentX(2),"Tuesday");
+easyButton b24  = new easyButton(percentX(22), percentY(61), percentX(2), percentX(2),"Wednesday");
+easyButton b25  = new easyButton(percentX(22), percentY(69), percentX(2), percentX(2),"Thursday");
+easyButton b26  = new easyButton(percentX(22), percentY(77), percentX(2), percentX(2),"Friday");
+easyButton b27  = new easyButton(percentX(22), percentY(86), percentX(2), percentX(2),"Saturday");
+
 
 //percent screen width height utilites
-int percentX(int value){
-
-//  println("Returning value of percent " + (value * width)/100 + "value of width is " + width);
-  return (value * width)/100;
+float percentX(int value){
+  return (value * sizeX)/100;
 }
 
-int percentY(int value){
-  return (value * height)/100;
+float percentY(int value){
+  return (value * sizeY)/100;
+}
+
+void drawButtons()
+{
+  b1.drawEasy();
+  b2.drawEasy();
+  b3.drawEasy();
+  b4.drawEasy();
+  b5.drawEasy();
+  b6.drawEasy();
+  b7.drawEasy();
+  b8.drawEasy();
+  b9.drawEasy();
+  b10.drawEasy();
+  b11.drawEasy();
+  b12.drawEasy();
+  b13.drawEasy();
+  b14.drawEasy();
+  b15.drawEasy();
+  b16.drawEasy();
+  b17.drawEasy();
+  b18.drawEasy();
+  b19.drawEasy();
+  b20.drawEasy();
+  b21.drawEasy();
+  b22.drawEasy();
+  b23.drawEasy();
+  b24.drawEasy();
+  b25.drawEasy();
+  b26.drawEasy();
+  b27.drawEasy();
 }
 
 void mouseClicked() {
@@ -70,6 +145,115 @@ void mouseClicked() {
   else if (right.mouseOver()) {
     map.panRight();
   }
+  else if (b1.mouseOver())
+  {
+    b1.toggleState();
+  }
+  else if (b2.mouseOver())
+  {
+    b2.toggleState();
+  }
+  else if (b3.mouseOver())
+  {
+    b3.toggleState();
+  }
+  else if (b4.mouseOver())
+  {
+    b4.toggleState();
+  }
+  else if (b5.mouseOver())
+  {
+    b5.toggleState();
+  }
+  else if (b6.mouseOver())
+  {
+    b6.toggleState();
+  }
+  else if (b7.mouseOver())
+  {
+    b7.toggleState();
+  }
+  else if (b8.mouseOver())
+  {
+    b8.toggleState();
+  }
+  else if (b9.mouseOver())
+  {
+    b9.toggleState();
+  }
+  else if (b10.mouseOver())
+  {
+    b10.toggleState();
+  }
+  else if (b11.mouseOver())
+  {
+    b11.toggleState();
+  }
+  else if (b12.mouseOver())
+  {
+    b12.toggleState();
+  }
+  else if (b13.mouseOver())
+  {
+    b13.toggleState();
+  }
+  else if (b14.mouseOver())
+  {
+    b14.toggleState();
+  }
+  else if (b15.mouseOver())
+  {
+    b15.toggleState();
+  }
+  else if (b16.mouseOver())
+  {
+    b16.toggleState();
+  }
+  else if (b17.mouseOver())
+  {
+    b17.toggleState();
+  }
+  else if (b18.mouseOver())
+  {
+    b18.toggleState();
+  }
+  else if (b19.mouseOver())
+  {
+    b19.toggleState();
+  }
+  else if (b20.mouseOver())
+  {
+    b20.toggleState();
+  }
+  else if (b21.mouseOver())
+  {
+    b21.toggleState();
+  }
+  else if (b22.mouseOver())
+  {
+    b22.toggleState();
+  }
+  else if (b23.mouseOver())
+  {
+    b23.toggleState();
+  }
+  else if (b24.mouseOver())
+  {
+    b24.toggleState();
+  }
+  else if (b25.mouseOver())
+  {
+    b25.toggleState();
+  }
+  else if (b26.mouseOver())
+  {
+    b26.toggleState();
+  }
+  else if (b27.mouseOver())
+  {
+    b27.toggleState();
+  }
+  
 }
 
 
@@ -88,6 +272,17 @@ int touchID2;
 
 PVector initTouchPos = new PVector();
 PVector initTouchPos2 = new PVector();
+
+void fetchData()
+{
+  //println("inside fetch Data");
+  db.getConnection();
+ // dataPoint = db.getFormatData(); 
+  if (dataPoint == null)
+    System.exit(1);  
+  db.closeConnection();
+}
+
 
 void touchDown(int ID, float xPos, float yPos, float xWidth, float yWidth){
   noFill();
@@ -119,17 +314,17 @@ void touchDown(int ID, float xPos, float yPos, float xWidth, float yWidth){
   else
     clicked = false;
     
-  println("menu is " + menu);
-  if(menu && dist(percentX(22), percentY(65), xPos, yPos) < percentY(5))
+  //println("menu is " + menu);
+  if(menu && dist(percentX(22), percentY(35), xPos, yPos) < percentY(5))
   {
     //println();
      menu = false;
-     println("menu is turned " + menu);
+    // println("menu is turned " + menu);
   }
   else if (!menu && dist(percentX(22), percentY(99), xPos, yPos) < percentY(5))
   {
       menu = true;
-      println("menu is turned " + menu);
+      //println("menu is turned " + menu);
   }
   
 }// touchDown
@@ -139,11 +334,11 @@ void touchMove(int ID, float xPos, float yPos, float xWidth, float yWidth){
   stroke(0,255,0);
   ellipse( xPos, yPos, xWidth * 2, yWidth * 2 );
   
-  if( touchList.size() < 2 ){
+  if( touchList.size() < 2 && xPos > percentX(40)){
     // Only one touch, drag map based on last position
     map.tx += (xPos - lastTouchPos.x)/map.sc;
     map.ty += (yPos - lastTouchPos.y)/map.sc;
-  } else if( touchList.size() == 2 ){
+  } else if( touchList.size() == 2 && xPos > percentX(40)){
     // Only two touch, scale map based on midpoint and distance from initial touch positions
     
     float sc = dist(lastTouchPos.x, lastTouchPos.y, lastTouchPos2.x, lastTouchPos2.y);
@@ -161,7 +356,7 @@ void touchMove(int ID, float xPos, float yPos, float xWidth, float yWidth){
     map.sc *= sc;
     map.tx += mx/map.sc;
     map.ty += my/map.sc;
-  } else if( touchList.size() >= 5 ){
+  } else if( touchList.size() >= 5 && xPos > percentX(40)){
     
     // Zoom to entire USA
     map.setCenterZoom(locationUSA, 6);  
@@ -258,6 +453,10 @@ void drawDetails()
     fill (0,255,0,200);
     rectMode(CORNER);
     rect(p.x, p.y, percentX(10), percentY(30), percentX(2));
+    textAlign(LEFT, UP);
+    textFont(font);
+    fill(0,0,0);
+    text(dataPoint.get(0), p.x, p.y );
   }
 }
 
@@ -265,6 +464,7 @@ void drawMenu(int _mhgt)
 {
     fill (100,0,255,100);
     rectMode(CORNERS);
+    noStroke();
     rect(percentX(0),percentY(_mhgt), percentX(45), percentY(100), percentX(2));
     fill (#1947D1);
     stroke(100,0,255,100);
@@ -272,6 +472,16 @@ void drawMenu(int _mhgt)
     ellipse(percentX(22), percentY(_mhgt), percentX(2), percentY(3));
     noStroke();
     strokeWeight(0);
+}
+
+/***************Structures******************/
+
+class Glyph
+{
+  int fatalities;
+  int caseId;
+  String dateTime;
+  String[] vins;
 }
 
 

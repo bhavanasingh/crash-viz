@@ -37,7 +37,6 @@ void setup() {
   
   if( onWall )
   {
-    //size(8160, 2304, P2D); // JAVA2D or P2D is recommended
     size(sizeX, sizeY, P2D);
     
     // Make the connection to the tracker machine
@@ -86,6 +85,7 @@ void setup() {
       mouseWheel(evt.getWheelRotation());
     }
   }); 
+  rectMode(CORNER);
 
 }
 
@@ -100,20 +100,16 @@ void draw() {
 
   // draw all the buttons and check for mouse-over
   boolean hand = false;
-  if (gui) {
-    for (int i = 0; i < buttons.length; i++) {
-      buttons[i].draw();
-      hand = hand || buttons[i].mouseOver();
-    }
-  }
+  
 
+//fetchData();
 // see if we're over any buttons, and respond accordingly:
 
   // if we're over a button, use the finger pointer
   // otherwise use the cross
   cursor(hand ? HAND : CROSS);
 if (gui) {
-    textFont(font, 12);
+    textFont(font, 12 * scaleFactor);
 
     // grab the lat/lon location under the mouse point:
     Location location = map.pointLocation(mouseX, mouseY);
@@ -125,7 +121,7 @@ if (gui) {
 
     if(clicked)
     drawDetails();
-    if(menuCounter <= 99 && menuCounter >= 65)
+    if(menuCounter <= 99 && menuCounter >= 35)
     {
       if(!menu)
       {
@@ -136,7 +132,7 @@ if (gui) {
       }
       else if (menu)
       {
-        while(menuCounter > 65)
+        while(menuCounter > 35)
         {
            menuCounter -= 1;
         }
@@ -144,6 +140,11 @@ if (gui) {
     }
     
     drawMenu(menuCounter);
+    
+    if (menu && menuCounter == 35)
+    {
+      drawButtons();
+    }
     // grab the center
     //location = map.pointLocation(mapOffset.x + mapSize.x/2, mapOffset.y + mapSize.y/2);
 
@@ -155,9 +156,12 @@ if (gui) {
     location = locationChicago;
     Point2f p = map.locationPoint(location);
 
-    fill(0,255,128);
-    stroke(255,255,0);
-    ellipse(p.x, p.y, 10, 10);
+    if (p.x > percentX(35) )
+    {
+      fill(0,255,128);
+      stroke(255,255,0);
+      ellipse(p.x, p.y, 10*scaleFactorY, 10);
+    }
   }  
   
   fill(0);
@@ -172,7 +176,15 @@ if (gui) {
   //println((float)map.sc);
   //println((float)map.tx + " " + (float)map.ty);
   //println();
+ if (gui && !onWall) {
+   //println("Inside the function that prints buttons");
+    for (int i = 0; i < buttons.length; i++) {
+      buttons[i].draw();
+      hand = hand || buttons[i].mouseOver();
+    }
+  } 
   
-  omicronManager.process();
+ omicronManager.process();
 }
+
 

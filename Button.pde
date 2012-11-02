@@ -1,9 +1,61 @@
+class easyButton
+{
+  float X, Y, w, h;
+  boolean state;
+  String label;
+  
+  easyButton(float _x, float _y, float _w, float _h,String _l )
+  {
+    X = _x;
+    Y = _y;
+    w = _w;
+    h = _h;
+    label = _l;
+    state = false;
+    
+    println("Inside the contrctor of easyButton. Value of (X, Y) is (" + X + "," + Y + ") \n");
+  }
+  
+  boolean mouseOver() {
+    return (mouseX > X && mouseX < X + w && mouseY > Y && mouseY < Y + h);
+  }
+  
+  void toggleState()
+  {
+    state = !state;
+  }
+  
+  void drawEasy()
+  {
+    //println("entering drawEasy function. Value of (X, Y) is (" + X + "," + Y + ") \n");
+    rectMode(CORNER);
+    stroke(#AB8CFF);
+    strokeWeight(2 * scaleFactor);
+    fill(#1947D1, 200);
+    rect(X, Y, w, h, percentY(1));
+    noFill();
+    stroke(#AB8CFF);
+    if (state)
+    {
+      line(X,Y, X+w, Y+h);
+      line(X+w,Y, X, Y+h);
+    }
+    textFont(font, 13 * scaleFactor);
+    textAlign(LEFT, UP);
+    fill(0);
+    text(label, X + percentY(8), Y + h / 2);
+    
+  }
+  
+}
+
 
 class Button {
   
   float x, y, w, h;
   
   Button(float x, float y, float w, float h) {
+//    println("Value of x and y in button is x = " + x + " y = " + y);
     this.x = x;
     this.y = y;
     this.w = w;
@@ -15,9 +67,10 @@ class Button {
   }
   
   void draw() {
-    stroke(80);
-    fill(mouseOver() ? 255 : 220);
+    stroke(8);
+    fill(mouseOver() ? 255: 220);
     rect(x,y,w,h); 
+//    println("drawing rectagle from (" + x + "," + y + " with width (" + w + ", " + h + ")");
   }
   
 }
@@ -27,13 +80,15 @@ class ZoomButton extends Button {
   boolean in = false;
   
   ZoomButton(float x, float y, float w, float h, boolean in) {
-    super(x, y, w, h);
+        super(x, y, w, h);    
+   // println("Value of x and y in zoom button is x = " + x + " y = " + y);
+
     this.in = in;
   }
   
   void draw() {
     super.draw();
-    stroke(0);
+    stroke(2);
     line(x+3,y+h/2,x+w-3,y+h/2);
     if (in) {
       line(x+w/2,y+3,x+w/2,y+h-3);
@@ -41,6 +96,7 @@ class ZoomButton extends Button {
   }
   
 }
+
 
 class PanButton extends Button {
   
