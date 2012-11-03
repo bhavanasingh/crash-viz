@@ -35,12 +35,12 @@ class easyButton
   {
     //println("entering drawEasy function. Value of (X, Y) is (" + X + "," + Y + ") \n");
     rectMode(CORNER);
-    stroke(#AB8CFF);
+    stroke(#D9D9D9);
     strokeWeight(2 * scaleFactor);
-    fill(#1947D1, 200);
+    fill(#404040, 200);
     rect(X, Y, w, h, percentY(1));
     noFill();
-    stroke(#AB8CFF);
+    stroke(#D9D9D9);
     if (state)
     {
       line(X,Y, X+w, Y+h);

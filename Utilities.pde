@@ -749,12 +749,12 @@ void drawDetails()
 
 void drawMenu(int _mhgt)
 {
-    fill (100,0,255,100);
+    fill (#333333,100);
     rectMode(CORNERS);
     noStroke();
     rect(percentX(0),percentY(_mhgt), percentX(45), percentY(100), percentX(2));
-    fill (#1947D1);
-    stroke(100,0,255,100);
+    fill (#191919);
+    stroke(#333333,100);
     strokeWeight(percentY(1));
     ellipse(percentX(22), percentY(_mhgt), percentX(2), percentY(3));
     noStroke();
