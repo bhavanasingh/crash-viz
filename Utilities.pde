@@ -218,22 +218,42 @@ void mouseClicked() {
   else if (b7.mouseOver())
   {
     b7.toggleState();
+    b8.setStateFalse();
+    b9.setStateFalse();
+    b10.setStateFalse();
+    b11.setStateFalse();
   }
   else if (b8.mouseOver())
   {
     b8.toggleState();
+    b7.setStateFalse();
+    b9.setStateFalse();
+    b10.setStateFalse();
+    b11.setStateFalse();
   }
   else if (b9.mouseOver())
   {
     b9.toggleState();
+    b8.setStateFalse();
+    b7.setStateFalse();
+    b10.setStateFalse();
+    b11.setStateFalse();
   }
   else if (b10.mouseOver())
   {
     b10.toggleState();
+    b7.setStateFalse();
+    b8.setStateFalse();
+    b9.setStateFalse();
+    b11.setStateFalse();
   }
   else if (b11.mouseOver())
   {
     b11.toggleState();
+    b7.setStateFalse();
+    b8.setStateFalse();
+    b9.setStateFalse();
+    b10.setStateFalse();
   }
   else if (b12.mouseOver())
   {
@@ -242,106 +262,283 @@ void mouseClicked() {
   else if (b13.mouseOver())
   {
     b13.toggleState();
+    b14.setStateFalse();
+    b15.setStateFalse();
+    b16.setStateFalse();
   }
   else if (b14.mouseOver())
   {
     b14.toggleState();
+    b13.setStateFalse();
+    b15.setStateFalse();
+    b16.setStateFalse();
   }
   else if (b15.mouseOver())
   {
     b15.toggleState();
+    b13.setStateFalse();
+    b14.setStateFalse();
+    b16.setStateFalse();
   }
   else if (b16.mouseOver())
   {
     b16.toggleState();
+    b13.setStateFalse();
+    b14.setStateFalse();
+    b15.setStateFalse();
   }
   else if (b17.mouseOver())
   {
     b17.toggleState();
+    b18.setStateFalse();
+    b19.setStateFalse();
+    b20.setStateFalse();
   }
   else if (b18.mouseOver())
   {
     b18.toggleState();
+    b17.setStateFalse();
+    b19.setStateFalse();
+    b20.setStateFalse();
   }
   else if (b19.mouseOver())
   {
     b19.toggleState();
+    b17.setStateFalse();
+    b18.setStateFalse();
+    b20.setStateFalse();
   }
   else if (b20.mouseOver())
   {
     b20.toggleState();
+    b17.setStateFalse();
+    b18.setStateFalse();
+    b19.setStateFalse();
   }
   else if (b21.mouseOver())
   {
     b21.toggleState();
+    b22.setStateFalse();
+    b23.setStateFalse();
+    b24.setStateFalse();
+    b25.setStateFalse();
+    b26.setStateFalse();
+    b27.setStateFalse();
   }
   else if (b22.mouseOver())
   {
     b22.toggleState();
+    b21.setStateFalse();
+    b23.setStateFalse();
+    b24.setStateFalse();
+    b25.setStateFalse();
+    b26.setStateFalse();
+    b27.setStateFalse();
   }
   else if (b23.mouseOver())
   {
     b23.toggleState();
+    b21.setStateFalse();
+    b22.setStateFalse();
+    b24.setStateFalse();
+    b25.setStateFalse();
+    b26.setStateFalse();
+    b27.setStateFalse();
   }
   else if (b24.mouseOver())
   {
     b24.toggleState();
+    b21.setStateFalse();
+    b22.setStateFalse();
+    b23.setStateFalse();
+    b25.setStateFalse();
+    b26.setStateFalse();
+    b27.setStateFalse();
   }
   else if (b25.mouseOver())
   {
     b25.toggleState();
+    b21.setStateFalse();
+    b22.setStateFalse();
+    b23.setStateFalse();
+    b24.setStateFalse();
+    b26.setStateFalse();
+    b27.setStateFalse();
   }
   else if (b26.mouseOver())
   {
     b26.toggleState();
+    b21.setStateFalse();
+    b22.setStateFalse();
+    b23.setStateFalse();
+    b24.setStateFalse();
+    b25.setStateFalse();
+    b27.setStateFalse();
   }
   else if (b27.mouseOver())
   {
     b27.toggleState();
+    b21.setStateFalse();
+    b22.setStateFalse();
+    b23.setStateFalse();
+    b24.setStateFalse();
+    b25.setStateFalse();
+    b26.setStateFalse();
   }
   else if (by1.mouseOver())
   {
     by1.toggleState();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by2.mouseOver())
   {
     by2.toggleState();
+    by1.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by3.mouseOver())
   {
     by3.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by4.mouseOver())
   {
     by4.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by5.mouseOver())
   {
     by5.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by6.mouseOver())
   {
     by6.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by7.mouseOver())
   {
     by7.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by8.mouseOver())
   {
     by8.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by9.mouseOver())
   {
     by9.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by10.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by10.mouseOver())
   {
     by10.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by11.setStateFalse();
   }
   else if (by11.mouseOver())
   {
     by11.toggleState();
+    by1.setStateFalse();
+    by2.setStateFalse();
+    by3.setStateFalse();
+    by4.setStateFalse();
+    by5.setStateFalse();
+    by6.setStateFalse();
+    by7.setStateFalse();
+    by8.setStateFalse();
+    by9.setStateFalse();
+    by10.setStateFalse();
+    
   }
  
 }
