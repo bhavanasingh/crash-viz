@@ -117,7 +117,7 @@ if (gui) {
     fill(255,255,0);
     textAlign(LEFT, BOTTOM);
     //text("mouse: " + location, 5, height-5);
-    text("Touches: " + touchList.size(), 5, height-5);
+    //text("Touches: " + touchList.size(), 5, height-5);
 
     if(clicked)
     drawDetails();
@@ -145,12 +145,16 @@ if (gui) {
     {
       drawButtons();
     }
+    else
+    {
+      drawYearButtons();
+    }
     // grab the center
     //location = map.pointLocation(mapOffset.x + mapSize.x/2, mapOffset.y + mapSize.y/2);
 
     fill(255,255,0);
     //textAlign(RIGHT, BOTTOM);
-    text("map: " + location, width-5, height-5);
+    //text("map: " + location, width-5, height-5);
 
     //location = new Location(51.500, -0.126);
     location = locationChicago;
@@ -169,9 +173,9 @@ if (gui) {
   
   // Center of the map
   Location location = map.pointLocation(mapOffset.x + mapSize.x/2, mapOffset.y + mapSize.y/2);
-  text("map: " + location + " scale: "+map.sc, 5, height-5 - 16);
+  //text("map: " + location + " scale: "+map.sc, 5, height-5 - 16);
   
-  text("Touches: " + touchList.size(), 5, height-5);
+  //text("Touches: " + touchList.size(), 5, height-5);
     
   //println((float)map.sc);
   //println((float)map.tx + " " + (float)map.ty);
@@ -186,5 +190,3 @@ if (gui) {
   
  omicronManager.process();
 }
-
-

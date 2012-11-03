@@ -59,32 +59,47 @@ easyButton b4  = new easyButton(percentX(1), percentY(66), percentX(2), percentX
 easyButton b5  = new easyButton(percentX(1), percentY(74), percentX(2), percentX(2),"Old Adult");
 easyButton b6  = new easyButton(percentX(1), percentY(82), percentX(2), percentX(2),"Elderly");
 
-easyButton b7  = new easyButton(percentX(8), percentY(37), percentX(2), percentX(2),"Clear");
-easyButton b8  = new easyButton(percentX(8), percentY(45), percentX(2), percentX(2),"Rain");
-easyButton b9  = new easyButton(percentX(8), percentY(53), percentX(2), percentX(2),"Sleet");
-easyButton b10  = new easyButton(percentX(8), percentY(61), percentX(2), percentX(2),"Snow");
-easyButton b11  = new easyButton(percentX(8), percentY(69), percentX(2), percentX(2),"Fog");
+easyButton b7  = new easyButton(percentX(10), percentY(37), percentX(2), percentX(2),"Clear");
+easyButton b8  = new easyButton(percentX(10), percentY(45), percentX(2), percentX(2),"Rain");
+easyButton b9  = new easyButton(percentX(10), percentY(53), percentX(2), percentX(2),"Sleet");
+easyButton b10  = new easyButton(percentX(10), percentY(61), percentX(2), percentX(2),"Snow");
+easyButton b11  = new easyButton(percentX(10), percentY(69), percentX(2), percentX(2),"Fog");
 
-easyButton b12  = new easyButton(percentX(8), percentY(82), percentX(2), percentX(2),"Hit and\nRun");
+easyButton b12  = new easyButton(percentX(10), percentY(82), percentX(2), percentX(2),"Hit and\nRun");
 
-easyButton b13  = new easyButton(percentX(15), percentY(37), percentX(2), percentX(2),"Morning");
-easyButton b14  = new easyButton(percentX(15), percentY(45), percentX(2), percentX(2),"Afternoon");
-easyButton b15  = new easyButton(percentX(15), percentY(53), percentX(2), percentX(2),"Evening");
-easyButton b16  = new easyButton(percentX(15), percentY(61), percentX(2), percentX(2),"Night");
+easyButton b13  = new easyButton(percentX(19), percentY(37), percentX(2), percentX(2),"Morning");
+easyButton b14  = new easyButton(percentX(19), percentY(45), percentX(2), percentX(2),"Afternoon");
+easyButton b15  = new easyButton(percentX(19), percentY(53), percentX(2), percentX(2),"Evening");
+easyButton b16  = new easyButton(percentX(19), percentY(61), percentX(2), percentX(2),"Night");
 
-easyButton b17  = new easyButton(percentX(15), percentY(74), percentX(2), percentX(2),"Winter");
-easyButton b18  = new easyButton(percentX(15), percentY(82), percentX(2), percentX(2),"Spring");
-easyButton b19  = new easyButton(percentX(15), percentY(90), percentX(2), percentX(2),"Summer");
-easyButton b20  = new easyButton(percentX(15), percentY(98), percentX(2), percentX(2),"Fall");
+easyButton b17  = new easyButton(percentX(28), percentY(37), percentX(2), percentX(2),"Winter");
+easyButton b18  = new easyButton(percentX(28), percentY(45), percentX(2), percentX(2),"Spring");
+easyButton b19  = new easyButton(percentX(28), percentY(53), percentX(2), percentX(2),"Summer");
+easyButton b20  = new easyButton(percentX(28), percentY(61), percentX(2), percentX(2),"Fall");
 
-easyButton b21  = new easyButton(percentX(22), percentY(37), percentX(2), percentX(2),"Sunday");
-easyButton b22  = new easyButton(percentX(22), percentY(45), percentX(2), percentX(2),"Monday");
-easyButton b23  = new easyButton(percentX(22), percentY(53), percentX(2), percentX(2),"Tuesday");
-easyButton b24  = new easyButton(percentX(22), percentY(61), percentX(2), percentX(2),"Wednesday");
-easyButton b25  = new easyButton(percentX(22), percentY(69), percentX(2), percentX(2),"Thursday");
-easyButton b26  = new easyButton(percentX(22), percentY(77), percentX(2), percentX(2),"Friday");
-easyButton b27  = new easyButton(percentX(22), percentY(86), percentX(2), percentX(2),"Saturday");
+easyButton b21  = new easyButton(percentX(37), percentY(37), percentX(2), percentX(2),"Sunday");
+easyButton b22  = new easyButton(percentX(37), percentY(45), percentX(2), percentX(2),"Monday");
+easyButton b23  = new easyButton(percentX(37), percentY(53), percentX(2), percentX(2),"Tuesday");
+easyButton b24  = new easyButton(percentX(37), percentY(61), percentX(2), percentX(2),"Wednesday");
+easyButton b25  = new easyButton(percentX(37), percentY(69), percentX(2), percentX(2),"Thursday");
+easyButton b26  = new easyButton(percentX(37), percentY(77), percentX(2), percentX(2),"Friday");
+easyButton b27  = new easyButton(percentX(37), percentY(86), percentX(2), percentX(2),"Saturday");
 
+easyButton b28  = new easyButton(percentX(21), percentY(80), percentX(8), percentX(2),"Update");
+
+//year buttons
+
+easyButton by1  = new easyButton(percentX(1), percentY(80), percentX(6), percentY(15),"All");
+easyButton by2  = new easyButton(percentX(10), percentY(80), percentX(6), percentY(5),"2001");
+easyButton by3  = new easyButton(percentX(16), percentY(80), percentX(6), percentY(5),"2002");
+easyButton by4  = new easyButton(percentX(22), percentY(80), percentX(6), percentY(5),"2003");
+easyButton by5  = new easyButton(percentX(28), percentY(80), percentX(6), percentY(5),"2004");
+easyButton by6  = new easyButton(percentX(34), percentY(80), percentX(6), percentY(5),"2005");
+easyButton by7  = new easyButton(percentX(10), percentY(90), percentX(6), percentY(5),"2006");
+easyButton by8  = new easyButton(percentX(16), percentY(90), percentX(6), percentY(5),"2007");
+easyButton by9  = new easyButton(percentX(22), percentY(90), percentX(6), percentY(5),"2008");
+easyButton by10  = new easyButton(percentX(28), percentY(90), percentX(6), percentY(5),"2009");
+easyButton by11  = new easyButton(percentX(34), percentY(90), percentX(6), percentY(5),"2010");
 
 //percent screen width height utilites
 float percentX(int value){
@@ -93,6 +108,22 @@ float percentX(int value){
 
 float percentY(int value){
   return (value * sizeY)/100;
+}
+
+void drawYearButtons()
+{
+  by1.drawEasy();
+  by2.drawEasy();
+  by3.drawEasy();
+  by4.drawEasy();
+  by5.drawEasy();
+  by6.drawEasy();
+  by7.drawEasy();
+  by8.drawEasy();
+  by9.drawEasy();
+  by10.drawEasy();
+  by11.drawEasy();
+  
 }
 
 void drawButtons()
@@ -124,6 +155,7 @@ void drawButtons()
   b25.drawEasy();
   b26.drawEasy();
   b27.drawEasy();
+  b28.drawEasy();
 }
 
 void mouseClicked() {
@@ -148,26 +180,40 @@ void mouseClicked() {
   else if (b1.mouseOver())
   {
     b1.toggleState();
+    b2.setStateFalse();
   }
   else if (b2.mouseOver())
   {
     b2.toggleState();
+    b1.setStateFalse();
   }
   else if (b3.mouseOver())
   {
     b3.toggleState();
+    b4.setStateFalse();
+    b5.setStateFalse();
+    b6.setStateFalse();
   }
   else if (b4.mouseOver())
   {
     b4.toggleState();
+    b3.setStateFalse();
+    b5.setStateFalse();
+    b6.setStateFalse();
   }
   else if (b5.mouseOver())
   {
     b5.toggleState();
+    b3.setStateFalse();
+    b4.setStateFalse();
+    b6.setStateFalse();
   }
   else if (b6.mouseOver())
   {
     b6.toggleState();
+    b3.setStateFalse();
+    b4.setStateFalse();
+    b5.setStateFalse();
   }
   else if (b7.mouseOver())
   {
@@ -253,7 +299,51 @@ void mouseClicked() {
   {
     b27.toggleState();
   }
-  
+  else if (by1.mouseOver())
+  {
+    by1.toggleState();
+  }
+  else if (by2.mouseOver())
+  {
+    by2.toggleState();
+  }
+  else if (by3.mouseOver())
+  {
+    by3.toggleState();
+  }
+  else if (by4.mouseOver())
+  {
+    by4.toggleState();
+  }
+  else if (by5.mouseOver())
+  {
+    by5.toggleState();
+  }
+  else if (by6.mouseOver())
+  {
+    by6.toggleState();
+  }
+  else if (by7.mouseOver())
+  {
+    by7.toggleState();
+  }
+  else if (by8.mouseOver())
+  {
+    by8.toggleState();
+  }
+  else if (by9.mouseOver())
+  {
+    by9.toggleState();
+  }
+  else if (by10.mouseOver())
+  {
+    by10.toggleState();
+  }
+  else if (by11.mouseOver())
+  {
+    by11.toggleState();
+  }
+ 
 }
 
 
@@ -480,7 +570,9 @@ class Glyph
 {
   int fatalities;
   int caseId;
-  String dateTime;
+  String HitNRun;
+  String Holiday;
+  int alcohol;
   String[] vins;
 }
 

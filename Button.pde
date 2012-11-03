@@ -25,6 +25,12 @@ class easyButton
     state = !state;
   }
   
+  void setStateFalse()
+  {
+    if(state == true)
+      state = !state;//set it to false
+  }
+  
   void drawEasy()
   {
     //println("entering drawEasy function. Value of (X, Y) is (" + X + "," + Y + ") \n");

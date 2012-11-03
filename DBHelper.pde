@@ -28,18 +28,18 @@ public class DBHelper {
   public ArrayList<Glyph> getFormatData(){
     
     ArrayList<Glyph> data = new ArrayList<Glyph>();
-    Glyph data1;
+    Glyph tempData;
     return data;
     //int i = 0;
     //select iaccday, iaccmon, iacchr, dayofweek from year_2001 ();
-   /* try{
+    /*try{
                 
       if ( conn.connect() )
       {
          // conn.query( "select Movie,TVMovie,Video,year from pd_SinglePlotData_Format where year between " + minYearValue + " and " + maxYearValue + " order by year " );
          conn.query( "select distinct(svin) year_2001 from where icasenum in (select distinct(icasenum) from year_2001 where latitude = 42.06862778 and longitude = -88.22028056) )");
           while (conn.next()) {
-            dataInt = Integer.parseInt(conn.getString(1)); 
+            tempData = String.parseStri(conn.getString(1)); 
             data.add(dataInt);
                  
         }
