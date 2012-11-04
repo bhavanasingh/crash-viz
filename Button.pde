@@ -13,7 +13,7 @@ class easyButton
     label = _l;
     state = false;
     
-    println("Inside the contrctor of easyButton. Value of (X, Y) is (" + X + "," + Y + ") \n");
+    //println("Inside the contrctor of easyButton. Value of (X, Y) is (" + X + "," + Y + ") \n");
   }
   
   boolean mouseOver() {
@@ -31,6 +31,10 @@ class easyButton
       state = !state;//set it to false
   }
   
+  boolean getState(){
+    return this.state;
+  }
+   
   void drawEasy()
   {
     //println("entering drawEasy function. Value of (X, Y) is (" + X + "," + Y + ") \n");

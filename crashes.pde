@@ -48,9 +48,10 @@ void setup() {
     size( sizeX, sizeY, JAVA2D );
     
   }
-  
+  //graphSetup();
   mapSize = new PVector( percentX(20), percentY(90));
   mapOffset = new PVector(percentX(70), percentY(0) );
+  
   // Do not use smooth() on the wall with P2D (JAVA2D ok)
   noSmooth();
 //  initializeStuff();
@@ -70,11 +71,7 @@ void setup() {
   map = new InteractiveMap(this, new Microsoft.RoadProvider(), mapOffset.x, mapOffset.y, mapSize.x, mapSize.y );
   
   setMapProvider(0);
-  map.setCenterZoom(locationChicago, 5);
-  // others would be "new Microsoft.HybridProvider()" or "new Microsoft.AerialProvider()"
-  // the Google ones get blocked after a few hundred tiles
-  // the Yahoo ones look terrible because they're not 256px squares :)
-
+  map.setCenterZoom(locationChicago, 6);
   
   // zoom 0 is the whole world, 19 is street level
   // (try some out, or use getlatlon.com to search for more)
@@ -91,6 +88,9 @@ void setup() {
 
 
 void draw() {
+  
+  graphSetup();
+  
   background(#CCCCCC);
   
   map.draw();
@@ -101,8 +101,6 @@ void draw() {
   // draw all the buttons and check for mouse-over
   boolean hand = false;
   
-
-//fetchData();
 // see if we're over any buttons, and respond accordingly:
 
   // if we're over a button, use the finger pointer
@@ -119,31 +117,18 @@ if (gui) {
     //text("mouse: " + location, 5, height-5);
     //text("Touches: " + touchList.size(), 5, height-5);
 
-    if(clicked)
-    drawDetails();
-    if(menuCounter <= 99 && menuCounter >= 35)
+    if(!menu)
     {
-      if(!menu)
-      {
-        while(menuCounter < 99)
-        {
-          menuCounter += 1;
-        }
-      }
-      else if (menu)
-      {
-        while(menuCounter > 35)
-        {
-           menuCounter -= 1;
-        }
-      }
+      drawMenu(99);
+      
     }
-    
-    drawMenu(menuCounter);
-    
-    if (menu && menuCounter == 35)
+    else if(menu)
     {
+      drawMenu(35);
+      if(!menuS)
       drawButtons();
+      else
+      drawStateMenu();
     }
     else
     {
@@ -167,6 +152,10 @@ if (gui) {
       ellipse(p.x, p.y, 10*scaleFactorY, 10);
     }
   }  
+  
+  drawGraph();
+  
+  drawMap();
   
   fill(0);
   //text("mouse: " + location, 5, height-5);
